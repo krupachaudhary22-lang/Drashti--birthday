@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Drashti 🎂</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;height:100%;font-family:Arial,sans-serif;background:#fff3f8;color:#5b315b}
+body{overflow:hidden}
+.screen{display:none;width:100vw;height:100vh;min-height:100svh;padding:28px 20px;align-items:center;justify-content:center;text-align:center;flex-direction:column}
+.screen.active{display:flex}
+h1{font-size:clamp(34px,9vw,64px);margin:0 0 18px}
+h2{font-size:clamp(28px,7vw,45px);margin:0 0 20px}
+p{font-size:clamp(18px,4.5vw,25px);line-height:1.5;margin:8px auto;max-width:700px}
+button{border:0;border-radius:40px;background:#f75ca6;color:white;font-size:18px;font-weight:700;padding:17px 30px;box-shadow:0 8px 25px #f75ca655;margin-top:22px;cursor:pointer}
+.small{font-size:15px;opacity:.75}
+.cake{position:relative;width:230px;height:220px;margin:20px auto}
+.plate{position:absolute;bottom:5px;left:10px;width:210px;height:18px;border-radius:50%;background:#e7a4bd}
+.layer{position:absolute;left:30px;width:170px;height:52px;border-radius:12px 12px 8px 8px;background:#ff8ebc;box-shadow:inset 0 -8px #ed699f}
+.layer.one{bottom:25px}.layer.two{bottom:70px;width:145px;left:42px;background:#ffc0d7}.layer.three{bottom:115px;width:120px;left:55px;background:#ff9ec5}
+.candle{position:absolute;bottom:165px;left:105px;width:18px;height:48px;background:#fff;border-radius:4px}
+.flame{position:absolute;bottom:211px;left:106px;width:17px;height:24px;background:#ff9f2d;border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 16px #ffb52e}
+.mem{width:min(92vw,480px);height:min(58vh,520px);border-radius:30px;object-fit:cover;background:#eee;box-shadow:0 15px 40px #8b4d7d25}
+.mem.error{object-fit:contain;padding:25px}
+#memoryTitle{font-size:18px;margin-top:18px}
+.progress{font-size:14px;opacity:.65;margin-top:8px}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.confetti span{position:absolute;top:-20px;font-size:24px;animation:fall 3s linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+</style>
+</head>
+<body>
+
+<div class="screen active" id="s0">
+  <div style="font-size:70px">🎀</div>
+  <h1>Happy Birthday Drashti! 💗</h1>
+  <p>Something cute is waiting for you... 🥹</p>
+  <button onclick="start()">Tap to begin ✨</button>
+</div>
+
+<div class="screen" id="s1">
+  <div style="font-size:70px">🎂</div>
+  <h1>Happy 25th Birthday! 🥳</h1>
+  <p>Today is all about you, Drashti 💕</p>
+  <button onclick="show('s2')">Let's celebrate →</button>
+</div>
+
+<div class="screen" id="s2">
+  <h2>Let's make your cake 🎂</h2>
+  <div class="cake">
+    <div class="plate"></div><div class="layer one"></div><div class="layer two"></div><div class="layer three"></div>
+    <div class="candle"></div><div class="flame"></div>
+  </div>
+  <p>Make a wish, birthday girl! ✨</p>
+  <button onclick="show('s3');confetti()">Make a wish 💫</button>
+</div>
+
+<div class="screen" id="s3">
+  <div style="font-size:75px">🎉🎈🎂</div>
+  <h1>Happy Birthday, Drashti! ❤️</h1>
+  <p>May your 25th year be full of love, laughter and beautiful memories.</p>
+  <button onclick="show('s4')">A little message for you →</button>
+</div>
+
+<div class="screen" id="s4">
+  <div style="font-size:55px">💌</div>
+  <h2>For you, Drashti</h2>
+  <p>You are the best thing that ever happened to me.</p>
+  <p>Thank you for always sticking by my side and accepting me just the way I am.</p>
+  <button onclick="show('s5')">Next →</button>
+</div>
+
+<div class="screen" id="s5">
+  <div style="font-size:55px">🥹💗</div>
+  <p>No matter where life takes us, I know we will always have each other's backs.</p>
+  <p>You bring so much joy, love, and laughter into my world every single day.</p>
+  <p>Life is so much brighter and happier with you by my side.</p>
+  <button onclick="show('memories')">Our memories 📸</button>
+</div>
+
+<div class="screen" id="memories">
+  <h2>Our memories 📸</h2>
+  <img id="memory" class="mem" alt="Memory">
+  <div id="memoryTitle">Photo 1</div>
+  <div class="progress" id="progress"></div>
+  <button onclick="nextMemory()">Next memory →</button>
+</div>
+
+<div class="screen" id="end">
+  <div style="font-size:80px">🎂💖🎉</div>
+  <h1>Love you, Drashti! 🫶</h1>
+  <p>Here's to many more birthdays and memories together. 💕</p>
+  <p>13 • 10 • 2000</p>
+</div>
+
+<audio id="music" loop preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+<div class="confetti" id="confetti"></div>
+
+<script>
+const photos = [
+  "IMG-20240917-WA0011.jpg",
+  "IMG-20260216-WA0021.jpg",
+  "IMG-20240816-WA0127.jpg",
+  "IMG_20240610_110038_824.jpg",
+  "IMG_7391.jpg",
+  "Snapchat-192961995~2.jpg"
+];
+
+let current = 0;
+
+function start(){
+  const music=document.getElementById("music");
+  music.play().catch(()=>{});
+  show("s1");
+}
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  if(id==="memories") loadMemory();
+}
+
+function loadMemory(){
+  const img=document.getElementById("memory");
+  img.classList.remove("error");
+  img.src=encodeURI(photos[current]);
+  img.onerror=()=>{
+    img.classList.add("error");
+    img.alt="Photo could not be loaded";
+    img.src="";
+  };
+  document.getElementById("memoryTitle").textContent="Photo "+(current+1);
+  document.getElementById("progress").textContent=(current+1)+" / "+photos.length;
+}
+
+function nextMemory(){
+  current++;
+  if(current>=photos.length){show("end");return;}
+  loadMemory();
+}
+
+function confetti(){
+  const box=document.getElementById("confetti");
+  box.innerHTML="";
+  for(let i=0;i<35;i++){
+    const s=document.createElement("span");
+    s.textContent=["🎉","✨","💗","🎈"][i%4];
+    s.style.left=Math.random()*100+"%";
+    s.style.animationDelay=Math.random()*1.5+"s";
+    s.style.animationDuration=(2.2+Math.random()*2)+"s";
+    box.appendChild(s);
+  }
+  setTimeout(()=>box.innerHTML="",5000);
+}
+</script>
+</body>
+</html>
