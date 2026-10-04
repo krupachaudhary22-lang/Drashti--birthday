@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Happy Birthday Drashti 🎂</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#fff5fb;color:#5a3150;overflow:hidden}
+.screen{display:none;min-height:100vh;width:100%;padding:28px 20px;align-items:center;justify-content:center;text-align:center;flex-direction:column}
+.screen.active{display:flex}.btn{border:0;border-radius:999px;padding:14px 24px;background:#ff75ad;color:#fff;font-size:17px;font-weight:700;box-shadow:0 8px 25px #ff75ad55}.small{font-size:14px;opacity:.75}
+h1{font-size:clamp(34px,10vw,64px);margin:10px 0}h2{font-size:clamp(26px,7vw,42px);margin:10px 0}.heart{font-size:64px;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}} .cake{position:relative;width:220px;height:190px;margin:18px auto 28px}
+.plate{position:absolute;bottom:5px;left:10px;width:200px;height:22px;border-radius:50%;background:#e6b3d0}
+.layer{position:absolute;left:35px;width:150px;border-radius:14px 14px 8px 8px;background:#ff8fc0;box-shadow:inset 0 -7px #e96da7}
+.l1{bottom:27px;height:48px}.l2{bottom:68px;left:48px;width:124px;height:42px}.l3{bottom:103px;left:62px;width:96px;height:36px}
+.candles{position:absolute;bottom:132px;left:73px;display:flex;gap:14px}.candle{width:10px;height:35px;background:#fff;border-radius:5px}.flame{font-size:22px;position:absolute;top:-23px;left:-6px;animation:flicker .4s infinite alternate}
+@keyframes flicker{to{transform:scale(1.15) translateY(-2px)}} .photo{width:min(82vw,320px);height:320px;object-fit:cover;border-radius:25px;box-shadow:0 10px 35px #6b315033;background:#eee}
+.message{max-width:650px;font-size:22px;line-height:1.55;padding:20px}.dots{margin:10px}
+</style>
+</head>
+<body>
+<div id="s0" class="screen active"><div class="heart">💗</div><h1>For Drashti</h1><p>Something cute is waiting for you...</p><button class="btn" onclick="start()">Tap to begin ✨</button></div>
+<div id="s1" class="screen"><h2>Happy 25th Birthday, Drashti! 🎉</h2><p>13 • 10 • 2000</p><button class="btn" onclick="next()">Let's celebrate 🎂</button></div>
+<div id="s2" class="screen"><h2>Let's make your cake 💕</h2><div class="cake"><div class="plate"></div><div class="layer l1"></div><div class="layer l2"></div><div class="layer l3"></div><div class="candles"><div class="candle"><span class="flame">🔥</span></div><div class="candle"><span class="flame">🔥</span></div><div class="candle"><span class="flame">🔥</span></div></div></div><button class="btn" onclick="next()">Make a wish ✨</button></div>
+<div id="s3" class="screen"><div class="heart">🕯️</div><h2>Close your eyes & make a wish</h2><p>May this year bring you endless happiness.</p><button class="btn" onclick="next()">Blow the candles 💨</button></div>
+<div id="s4" class="screen"><div class="heart">🎉</div><h1>Happy Birthday!</h1><p class="message">You are the best thing that ever happened to me. ❤️</p><button class="btn" onclick="next()">A few words for you 💌</button></div>
+<div id="s5" class="screen"><h2>For you, Drashti 💗</h2><p class="message">Thank you for always sticking by my side and accepting me just the way I am.</p><button class="btn" onclick="next()">Next</button></div>
+<div id="s6" class="screen"><h2>Always us 🤝</h2><p class="message">No matter where life takes us, I know we will always have each other's backs.</p><button class="btn" onclick="next()">Next</button></div>
+<div id="s7" class="screen"><h2>You bring so much joy 💕</h2><p class="message">You bring so much joy, love, and laughter into my world every single day.</p><button class="btn" onclick="next()">Next</button></div>
+<div id="s8" class="screen"><h2>Life is brighter with you ✨</h2><p class="message">Life is so much brighter and happier with you by my side.</p><button class="btn" onclick="next()">Our memories 📸</button></div>
+<div id="s9" class="screen"><h2>Our memories 📸</h2><img id="pic" class="photo" src="photos/1.jpg" alt="Memory"><p id="counter">Photo 1</p><button class="btn" onclick="nextPhoto()">Next memory →</button></div>
+<div id="s10" class="screen"><div class="heart">🎂💗</div><h1>Happy Birthday, Drashti!</h1><p>You are loved more than you know. 🥰</p><p class="small">Add your own photos and song to make this page yours.</p></div>
+<audio id="music" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
+<script>
+let i=0,p=1;const screens=[...document.querySelectorAll('.screen')];
+function show(n){screens.forEach(x=>x.classList.remove('active'));screens[n].classList.add('active');i=n}
+function start(){const a=document.getElementById('music');a.play().catch(()=>{});show(1)}
+function next(){show(Math.min(i+1,screens.length-1))}
+function nextPhoto(){p++;if(p>9){show(10);return}document.getElementById('pic').src='photos/'+p+'.jpg';document.getElementById('counter').textContent='Photo '+p}
+</script>
+</body>
+</html>
